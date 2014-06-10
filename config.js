@@ -20,6 +20,12 @@ module.exports = {
             user: "zhaotaiyuan@126.com"
             , pass: "********"
         }
+        , template: function(){
+            return '<h3>OMG:</h3>' +
+                '<p>' +
+                '爬虫检测到异常页面，请登录SSH进行查看！' +
+                '</p>';
+        }
         , target: "edisondik@163.com"
     }
     , cache: {

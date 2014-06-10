@@ -7,6 +7,19 @@
 var Config = require("./config");
 var Worker = require("./workers");
 var Async = require("async");
+var Mailer = require("nodemailer").createTransport("SMTP", Config.mail);
+
+//邮件发送函数
+function sendMail(to, callback){
+    var mailOptions = {
+        from:[Config.mail.name, Config.mail.auth.user].join(" ")
+        , to: to
+        , subject: Config.mail.name
+        , html: Config.mail.template
+    };
+
+    Mailer.sendMail(mailOptions, callback);
+}
 
 function inArray(item, collection){
     var i = collection.length;
@@ -110,9 +123,13 @@ function main(){
     //所有任务最终完成后的回调
     function restart(err, exceptionUrls){
 
-        //TODO 如果有任何异常，则发送邮件给管理员
+        //如果有任何异常，则发送邮件给管理员
         if((err || exceptionUrls.length) && Config.mail){
-
+            sendMail(Config.mail.target, function(err){
+                if(err){
+                    console.log(err);
+                }
+            });
         }
 
         //日志
