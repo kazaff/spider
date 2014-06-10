@@ -1,0 +1,20 @@
+{
+    "name": "spider",
+    "description": "use to launch a request to target URL,and creep the scheduled level",
+    "version": "0.0.1",
+    "private": true,
+    "author": {
+        "name": "kazaff",
+        "email": "edisondik@163.com",
+        "url": "http://www.kazaff.me"
+    },
+    "dependencies": {
+        "async": "~0.9.0"
+        , "htmlparser2": "~3.7.2"
+        , "request": "~2.36.0"
+        , "redis": "~0.10.3"
+    },
+    "engines": {
+        "node": ">=0.10.25"
+    }
+}
