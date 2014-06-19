@@ -11,6 +11,8 @@ var Url = require("url");
 
 var queue = Async.queue(function(task, callback){
 
+//console.log(Config.domain + task.target);   //TODO 测试用
+
     //请求->响应
     var options = {
         url: Config.domain + task.target
@@ -29,7 +31,7 @@ var queue = Async.queue(function(task, callback){
     }, function(cb){
         Request(options, function(error, response, body){
             //无响应后的重试，包括异常，响应状态不等于200
-            if(error || response.statusCode != 200){
+            if(error || (response.statusCode != 200 && response.statusCode != 401)){
                 errTimes--;
 
                 //如果重试过指定次数后依然无法得到正常结果，则放弃该目标地址

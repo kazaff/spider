@@ -4,8 +4,8 @@
 "use strict";
 
 module.exports = {
-    domain: "http://client.ztydata.com.cn:81/"  //目标域，不会请求跨域资源，避免第三方资源的耗时，确保以“/”结束
-    , startUrl: "/KnowledgeClient/index.do?indexType=index"  //起始地址
+    domain: "http://192.168.137.251:8080"  //目标域，不会请求跨域资源，避免第三方资源的耗时，确保以“/”结束
+    , startUrl: "/KnowledgeClient/"  //起始地址
     , concurrency: 10 //并发数
     , maxLevel: 4  //扫描层级
     , time: 3 //时间点，例如3表示凌晨三点
@@ -18,14 +18,9 @@ module.exports = {
         , port: 465
         , auth: {
             user: "zhaotaiyuan@126.com"
-            , pass: "********"
+            , pass: "zhaotaiyuan!@#"
         }
-        , template: function(){
-            return '<h3>OMG:</h3>' +
-                '<p>' +
-                '爬虫检测到异常页面，请登录SSH进行查看！' +
-                '</p>';
-        }
+        , template: '<h3>OMG:</h3><p>爬虫检测到异常页面，请登录SSH进行查看！</p>'
         , target: "edisondik@163.com"
     }
     , cache: {

@@ -4,7 +4,7 @@
 "use strict";
 
 var Async = require("async");
-var Config = require("config");
+var Config = require("./config");
 var Redis = require("redis");
 
 function run(callback){
@@ -12,24 +12,33 @@ function run(callback){
     Client.on("error", function(err){
         callback(err);
     });
-    client.auth(Config.cache.auth);
+    Client.auth(Config.cache.auth);
 
     var delCount = 0;
 
     Async.waterfall([
         function(cb){
-            client.keys(Config.cache.key, function(err, keys){
+            Client.keys(Config.cache.key, function(err, keys){
 
                 delCount = keys.length;
                 cb(null, keys);
             });
         }
         , function(keys, cb){
-            client.del(keys, function(err, total){
-                cb(null, total);
-            });
+            if(keys.length){
+                Client.del(keys, function(err, total){
+                    cb(null, total);
+                });
+
+            }else{
+                cb(null, 0);
+            }
+            
         }
     ], function(err, total){
+
+        Client.quit();
+
         if(delCount != total){
             return callback({error: 500, message: "some cache data was not be cleaned("+ total + "/" + delCount +")"});
         }
