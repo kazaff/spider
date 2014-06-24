@@ -18,7 +18,7 @@ module.exports = {
         , port: 465
         , auth: {
             user: "zhaotaiyuan@126.com"
-            , pass: "zhaotaiyuan!@#"
+            , pass: "********"
         }
         , template: '<h3>OMG:</h3><p>爬虫检测到异常页面，请登录SSH进行查看！</p>'
         , target: "edisondik@163.com"
